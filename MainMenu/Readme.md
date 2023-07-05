@@ -68,7 +68,7 @@ The first task is to ensure we have a 'backdrop frame' that covers the entire sc
 
 The next task is to create the 3 rows of images as a child of the backdrop frame, at {X=0.5, Y=0} , {X=0.5, Y =0.25}, and {X=0.5, Y=0.5} respectively - again editing the scalar property for position instead of the pixels. The size of each row should be {X=2, Y = 0.25} with respect to Scalar again, and with the anchor-point being {0.5,0}. The Anchor-Point determines where the centre of the image will be and hence with the values we have chosen, the full image should still cover the screen after the image has moved to X=0 or X=1 (due to our anchor point and image size). 
 
-<img src="../MainMenu/BeforeTween.png" width="400" height="300">
+<img style= "float: right" src="../MainMenu/BeforeTween.png" width="400" height="300">
 <img style= "float: right" src="../MainMenu/AfterTween.png" width="400" height="300"> 
 
 
