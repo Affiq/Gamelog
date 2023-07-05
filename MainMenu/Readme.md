@@ -97,6 +97,8 @@ By applying these to different rows with different target positions, the eventua
 
 ![](https://github.com/Affiq/Gamelog/blob/main/MainMenu/AnimatedBackground.gif)
 
+<h2> Camera Animating </h2>
+
 
 
 
