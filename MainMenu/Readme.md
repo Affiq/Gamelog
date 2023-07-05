@@ -66,9 +66,34 @@ Our game engine lacks the ability to create 'video' backgrounds, but we can repl
 
 The first task is to ensure we have a 'backdrop frame' that covers the entire screen by making the size of the frame {1,0,1,0}. The first parameter corresponds to X-Width in terms of scale size with respect to parent(so 0.5 would be half of it's parent size) and the second parameter corresponds to X-Width with respect to pixels. The 3rd corresponds to Scalar Y, and the 4th would be the Y-height with respect to pixels. It is generally good practice to use Scalar over pixels as screen resolutions may vary across the board, especially when dealing with a game that can be computer, mobile, tablet and console compatible.
 
-The next task is to create the 3 rows of images as a child of the backdrop frame, at {X=0.5, Y=0} , {X=0.5, Y =0.25}, and {X=0.5, Y=0.5} respectively - again editing the scalar property for position instead of the pixels. The size of each row should be {X=2, Y = 0.25} with respect to Scalar again, and with the anchor-point being {0.5,0}. The Anchor-Point determines where the centre of the image will be and hence with the values we have chosen, the full image should still cover the screen after the image has moved to X=0 or X=1 (due to our anchor point and image size). 
+The next task is to create the 3 rows of images as a child of the backdrop frame, at {X=0.5, Y=0} , {X=0.5, Y =0.25}, and {X=0.5, Y=0.5} respectively - again editing the scalar property for position instead of the pixels. The size of each row should be {X=2, Y = 0.25} with respect to Scalar again, and with the anchor-point being {0.5,0}. The Anchor-Point determines where the centre of the image will be and hence with the values we have chosen, the full image should still cover the screen after the image has moved to X=0 or X=1 (due to our anchor point and image size). A property for each image called ScaleType can be set to Tile to achieve a repeated image pattern effect.
 
 <img style= "float: right" src="../MainMenu/BeforeTween.png" width="400" height="300">
 <img style= "float: right" src="../MainMenu/AfterTween.png" width="400" height="300"> 
+
+<h2> Animating Each Image Row</h2>
+
+Each row can then be animated using the following steps - calling the Tween Service, creating a TweenInfo, determining target position, creating the tween, and then playing the tween. For the first row, we would like the anchor point to move backwards X=0 so that the image slides left. A tween info takes two parameters, the time taken for the animation/tween and the Easing Style (these include linear, cubic, bounce, and <a href="https://create.roblox.com/docs/reference/engine/enums/EasingStyle"> more </a>), but 0 corresponds to a linear movement for smooth animations. The following is an example of a tween being played for the first row.
+
+```
+local TweenServ = game:GetService("TweenService") -- Call the Tween Service
+local AnimTime = 20 				-- Determine animation time
+local newTweenInfo = TweenInfo.new(AnimTime,0)	-- Create a new tween info with the set animation time and easing style of 0
+local TargetPosition = UDim2.new(0,0,0,0)
+local TargetRow = script.Parent			-- Reference image to move position of
+local OriginPosition = TargetRow.Position
+
+local SlideLeftTween = TweenServ:Create(TargetRow, newTweenInfo, {Position = TargetPosition})	-- Create the tween
+
+SlideLeftTween:Play()	-- Play the tween
+
+SlideLeftTween.Completed:Connect(function()	-- Once tween is completed, reset the position and play the animation again continuously
+	TargetRow.Position = OriginPosition
+	SlideLeftTween:Play() 
+end)
+```
+
+
+
 
 
