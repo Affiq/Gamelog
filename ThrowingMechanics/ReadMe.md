@@ -14,7 +14,7 @@ player should be able to observe the potential trajectory of the object and when
 be applied to the object that will follow the trajectory.
 </p>
 
-
+<img src="../ThrowingMechanics/PersonThrowing.png" width="400" height="200">
 
 <h2> Throwing </h2>
 It seems a bit counter-intuitive to describe the implementation of the throwing before the aiming, but it is much easier to implement
