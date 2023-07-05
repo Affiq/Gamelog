@@ -47,3 +47,5 @@ UIS.InputBegan:Connect(function(input,gameprocessed)    -- Bind the user input t
 end)
 ```
 
+<h2> Animated Background </h2>
+Our game engine lacks the ability to create 'video' backgrounds, but we can replicate animated backgrounds using a TweenService. Tweens are resposible for the smooth movement or property changes of ingame parts or User Interface elements.
