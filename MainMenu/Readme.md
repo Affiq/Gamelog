@@ -15,7 +15,7 @@ Remote Events and Functions for cross-boundary communication (Server -> Client o
 
 <h2> Creating a Listener for our State </h2>
 
-The first thing to do is to create the String Value object and reference it. Once done, we can connect the StringValue.Changed event and then pass a function or execute a block responsible for the UI visibilities. The StringValue will be referred to as our Screen State from here on.
+The first thing to do is to create the String Value object and reference it. Once done, we will need to create a LocalScript. We can connect the StringValue.Changed event and then pass a function or execute a block responsible for the UI visibilities. The StringValue will be referred to as our Screen State from here on.
 
 ```
 local CurrentScreenRef = script.Parent            -- Object to listen for changes on
@@ -26,6 +26,17 @@ CurrentScreenRef.Changed:Connect(function()        -- Bind a function to the Val
 	elseif CurrentScreenRef.Value == "LevelSelect" then
 		-- Make all other screens invisible and LevelSelect screen visible
 	end
+end)
+```
+
+<h2> Triggering a State Change </h2>
+Now that the screen visibilities are tied to the change of Screen State, we will now need a button that can trigger the change in these screen states. A simple button is created within the MainMenu frame, and a LocalScript will be created underneath to listen for the left mouse click event. Upon clicking, the LocalScript should change the value of the Screen State which will then trigger the previous code block to switch screens.
+
+```
+LevelSelectButton = script.Parent		-- Reference the button to listen to
+
+LevelSelectButton.MouseButton1Click:Connect(function()
+	script.Parent.Parent.Parent.Parent.Parent.CurrentScreen.Value = "LevelSelect" -- Change the value of the Screen State [Convoluted reference]
 end)
 ```
 
