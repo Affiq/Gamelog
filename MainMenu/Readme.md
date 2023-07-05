@@ -93,9 +93,8 @@ SlideLeftTween.Completed:Connect(function()	-- Once tween is completed, reset th
 end)
 ```
 
-By applying these to different rows with different target positions, the eventual outcome should look like:
+By applying these to different rows with different target positions, the eventual outcome should look like (The animation should be smooth - the choppiness is due to the low framerate of the recording software):
 ![](https://github.com/Affiq/Gamelog/blob/main/MainMenu/AnimatedBackground.gif)
-The animation should be smooth - the choppiness is due to the low framerate of the recording software.
 
 
 
