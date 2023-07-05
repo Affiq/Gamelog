@@ -93,6 +93,11 @@ SlideLeftTween.Completed:Connect(function()	-- Once tween is completed, reset th
 end)
 ```
 
+By applying these to different rows with different target positions, the eventual outcome should look like:
+![](https://github.com/Affiq/Gamelog/blob/main/MainMenu/AnimatedBackground.gif)
+
+
+
 
 
 
