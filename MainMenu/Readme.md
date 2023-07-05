@@ -41,13 +41,14 @@ end)
 ```
 
 <h2> Console Compatibility </h2>
-As we mentioned before, we can now easily change the player menu now that the visibility is binded to the screen state. UIs on screen which involve a series of mouse clicks can be highly convoluted for console players. However, the same menu can now be controlled by a controller without dragging a cursor by listening for a gamepad input.
+As we mentioned before, we can now easily change the player menu now that the visibility is binded to the screen state. UIs on screen which involve a series of mouse clicks can be highly convoluted for console players. However, the same menu can now be controlled by a controller without dragging a cursor by listening for a gamepad input. 
+In this case, when a gamepad user presses on the A-Button, the screen should switch to the Level Select menu.
 
 ```
 local UIS = game:GetService("UserInputService")      -- Call the user input service to detect gamepad input
 
 -- Back function:
-local LevelSelectControllerBind = Enum.KeyCode.ButtonA     -- Create a simple reference to the user pressing the A button on the gamepad
+local LevelSelectControllerBind = Enum.KeyCode.ButtonA     -- Create a simple comparator value for the user pressing the A button on the gamepad
 
 UIS.InputBegan:Connect(function(input,gameprocessed)    -- Bind the user input to a logic block that determines what key the user has pressed and what actions to take
 	if gameprocessed then return end
@@ -57,6 +58,8 @@ UIS.InputBegan:Connect(function(input,gameprocessed)    -- Bind the user input t
 	end
 end)
 ```
+Numerous control functions can then be made for each menu, and the respective control function for the menu can be enabled (with the rest being disabled) using our original Screen State Listener control block.
+
 
 <h2> Animated Background </h2>
-Our game engine lacks the ability to create 'video' backgrounds, but we can replicate animated backgrounds using a TweenService. Tweens are resposible for the smooth movement or property changes of ingame parts or User Interface elements.
+Our game engine lacks the ability to create 'video' backgrounds, but we can replicate animated backgrounds using a TweenService. Tweens are responsible for the smooth movement or property changes of ingame parts or User Interface elements.
