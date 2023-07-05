@@ -11,7 +11,7 @@ In this scenario, we will be building a menu that stores the state of the menu (
 Some games may introduce methods of programming on both server-side and client-side. It is important to understand how the scripts affect the game on the client side, and how it affects the server-side (and how this is effectively replicated to the client side). In some circumstances, code will only happen on particular clients instead of the server (such as opposing enemies not being able to see your ping or minimap) and hence some careful thought is required on how your code should be structured.
 
 The game engine we are working with has the ability to fire Events and Functions for similar boundary interaction (Server -> Server or Own Client -> Own Client) or to use 
-Remote Events and Functions for cross-boundary communication (Server -> Client or Client -> Server or chain of these to form Client -> Server -> Client)
+Remote Events and Functions for cross-boundary communication (Server -> Client or Client -> Server or chain of these to form Client -> Server -> Client). We want our user to be able to control their own menu for the most part and hence client-sided coding (LocalScripts) will be used in this case.
 
 <h2> Creating a Listener for our State </h2>
 
