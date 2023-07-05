@@ -95,6 +95,7 @@ end)
 
 By applying these to different rows with different target positions, the eventual outcome should look like:
 ![](https://github.com/Affiq/Gamelog/blob/main/MainMenu/AnimatedBackground.gif)
+The animation should be smooth - the choppiness is due to the low framerate of the recording software.
 
 
 
