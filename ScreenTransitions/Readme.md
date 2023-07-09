@@ -37,6 +37,8 @@ CurrentScreenRef.Changed:Connect(function()
   elseif...
 ``` 
 
+![](https://github.com/Affiq/Gamelog/blob/main/ScreenTransitions/FadeTransition.gif)
+
 <h2> Short Lived Transition Approach </h2>
 Another approach would be to have a seperate User Interface with the animation built in stored in the ServerStorage. Once cloned into the 
 appropriate player, the LocalScript will then activate, playing the transition before deleting itself. This is especially useful as this
@@ -80,3 +82,4 @@ end
 script.Parent:Destroy()   -- Destroy animation screen UI once completed
 ``` 
 
+![](https://github.com/Affiq/Gamelog/blob/main/ScreenTransitions/SlideTransition.gif)
