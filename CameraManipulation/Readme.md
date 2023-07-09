@@ -1,1 +1,4 @@
+<h1> Camera Basics</h1>
+Different games may have differing camera functions depending upon the functionality or the style of a game - some games may utilise a arial camera such as ones seen in top-down shooters or roguelite games such as Enter the Gungeon or Hades. Some will use a side-angle camera such as Battleblock Theater or Darkest Dungeon. The Roblox engine by default supports a free-roam camera that is attached to the player's character.
 
+One important thing to note is that the camera can only be manipulated client side and hence through LocalScripts - for a server to control the camera, it would need to fire a Remote Event or a Remote function to the client to signal the camera manipulation. The following article will detail some useful features of the Camera instance in the engine.
