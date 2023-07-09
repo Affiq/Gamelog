@@ -1,1 +1,2 @@
-
+<h1> Collection Service</h1>
+The collection service is a convenient way to manage multiple instances in game by attaching tags to instances, such as scripts, levels, sounds, etc. This will be particularly useful in this scenario as our game involves a lot of level loading, and so levels will need to be cloned from the server and then destroyed once the round is done. In normal circumstances, we would need to iterate through workspaces and instances to destroy things in the game and add some form of logic that deals with the identification of the associated instances. With the collection service however, we are able to automatically locate these instances and apply some functions to it without the need to search for them.
