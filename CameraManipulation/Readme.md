@@ -33,6 +33,7 @@ The following example will detail how to create a camera that can shift focus on
 LocalScript (ClientSide)
 ```
 local CurrentCam = workspace.CurrentCamera        -- Get the clientside camera
+CurrentCam.Type = "Scriptable"                    -- Change the camera to scriptable mode
 
 local CameraStart = Instance.new("Part")          -- Create a new part in workspace to function as camera position
 CameraStart.Parent = workspace
@@ -52,6 +53,7 @@ LocalScript (ClientSide)
 ```
 function ChangeCamera(CameraStart, CameraFocus)
   local CurrentCam = workspace.CurrentCamera                                        -- Get the clientside camera
+  CurrentCam.Type = "Scriptable"                    -- Change the camera to scriptable mode
   local CameraCFrame = CFrame.new(CameraStart.Position, CameraFocus.Position)       -- Calculate Coordinate Frame value for CameraStart to face CameraFocus.
   CurrentCam.CFrame = CameraCFrame                                                  -- Change the orientation of the camera object
 end
