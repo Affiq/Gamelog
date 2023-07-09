@@ -14,7 +14,7 @@ function LoadLevel(LevelName)
 end
 ```
 
-Although the level is currently grouped together, our level requires them to be degrouped for the game to function properly. The next task is to set all children of the level's parent to the workspace while also tagging the object so that we are able to track which items we should remove once the round has ended. This will cover the level loading portion aspect of our game. However, some games may additionally spawn some items into the game which will not be tagged through the level loader - such as a bullet being instantiated - and so can be accounted for by tagging during instantiation or by using the Instance:ChildAdded() listener on the workspace and binding a tagging function to it.
+Although the level is currently grouped together, our level requires them to be degrouped for the game to function properly. The next task is to set all children of the level's parent to the workspace while also tagging the object with the "level" tag so that we are able to track which items we should remove once the round has ended. This will cover the level loading portion aspect of our game. However, some games may additionally spawn some items into the game which will not be tagged through the level loader - such as a bullet being instantiated - and so can be accounted for by tagging during instantiation or by using the Instance:ChildAdded() listener on the workspace and binding a tagging function to it.
 
 ```
 function LoadLevel(LevelName)
@@ -35,5 +35,45 @@ function LoadLevel(LevelName)
 end
 ```
 
-<h2> Level Remover </h2>
+<h2> Level Remover - Identifying Tagged Objects </h2>
+
+Once we have a functioning game and a round is over - be it through firing an event or a waiting mechanism - we will eventually need to clean up a level. Using out tagging mechanism, it becomes extremely trivial to identify which parts have been tagged with "level". Here, the GetTagged("Level") function will return an array (Lua refers to these as tables) of instances with the tag "level". All that we would need to do is to iterate through these and apply some function to them.
+
+```
+function RemoveLevel()	
+	print("Removing level")
+	local CollectionService = game:GetService("CollectionService")
+	for _, LevelObjs in pairs(CollectionService:GetTagged("Level")) do 		-- iterate over tagged objects
+		LevelObjs:Destroy()							-- destroy tagged object
+	end
+end
+```
+
+<h2> Listening to Tags being Added </h2>
+In our first code with the level loader, we managed to move the level to the workspace due to the fact that the level objects were grouped together. However, we can listen for an event in which tags are being added, and apply some function once the tag is being added. Here we define a different approach into moving the game into the workspace altogether. The following code will use some similar logic in our level loader in the first 2 blocks, but will outsource the parenting logic to the listener function.
+
+```
+function LoadLevel(LevelName)
+  -- Locate level and clone level INTO THE SAME FOLDER.
+  local LevelFolder = game.ServerStorage.Levels
+  local TargetLevel = LevelFolder:FindFirstChild(LevelName)
+  local NewLevel = TargetLevel:Clone()
+
+  -- Add Level tag to each child of the level only
+  local CollectionService = game:GetService("CollectionService")
+  for _, obj in pairs(NewLevel:GetChildren()) do
+    obj.Parent = workspace
+    CollectionService:AddTag(obj, "Level")
+  end
+  -- Destroy empty parent object
+  NewLevel:Destroy()
+end
+
+-- Define a listener to listen for level tag being added and apply some function
+-- This block will deal with instance being moved into the workspace
+game:GetService("CollectionService"):GetInstanceAddedSignal("Level"):Connect(function()
+	object.Parent = workspace
+end)
+```
+
 	
