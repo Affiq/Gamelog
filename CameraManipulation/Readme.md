@@ -104,3 +104,8 @@ game.ReplicatedStorage.TestRemoteEvent.OnClientEvent:Connect(function(Object1, O
   ChangeCamera(Object1, Object2)
 end)
 ```
+
+<h2> Finished Product </h2>
+Our finished product involves a LocalScript specifically made for a Host Player that listens in for A or D button presses (Also listens in for Left Button 1 and Right Button 1 press for consoles) to change the Object Value in the workspace. This Object Value references a part in a workspace for the camera focus, and automatically moves a Part to the position of the camera focus with an added vector [ CameraFocus.Position + (0,5,10) ] for example. This serves as a level selector in our game so that the host may decide what levels they can choose, whilst the other players can see what level the user is selecting. The UI [Level name and scores required] are dealth with another LocalScript located in the Player's UI.
+
+
