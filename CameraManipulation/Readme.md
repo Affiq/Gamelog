@@ -77,5 +77,25 @@ game.ReplicatedStorage.TestRemoteEvent:FireAllClients(CS2, CF2)
 wait(5)
 ```
 
-By executing the server scripts, this will fire off the test remote event which in turn will trigger the clientside camera change and trigger 3 different 'cutscenes'. However, what one would notice is that this will cause an immediate 'switch' or 'snap' effect in the camera change, much like a person switching views in a CCTV. One would may opt for a smooth transition to a different view and hence some animation may be required which can be achieved by using the TweenService that the game provides.
+By executing the server scripts, this will fire off the test remote event which in turn will trigger the clientside camera change and trigger 3 different 'cutscenes'. It is important to note the serverscript will execute for all players, but can be fired for specific players by using the :FireClient(player, ..params) in place of :FireAllClients(..Params) method instead. What one would also notice is that the current camera will cause an immediate 'switch', 'snap' or 'jerk' effect in the camera change, much like a person switching views in a CCTV. One would may opt for a smooth transition to a different view and hence some animation may be required which can be achieved by using the TweenService that the game provides.
 
+<h2> Smooth Transitions </h2>
+To animate a camera this involves first defining a TweenInfo - which specifies the time of the animation and the easing style i.e. linear or a bounce transition - before calling the TweenService to create a new tween. This tween will need to be defined using what Instance is to be animated, the previous TweenInfo, and also the property change given as a string. The following is a small change in our ClientSide script to allow linear transitions.
+
+LocalScript (ClientSide)
+```
+function ChangeCamera(CameraStart, CameraFocus)
+  local CurrentCam = workspace.CurrentCamera                                        -- Get the clientside camera
+  CurrentCam.Type = "Scriptable"                    -- Change the camera to scriptable mode
+  local CameraCFrame = CFrame.new(CameraStart.Position, CameraFocus.Position)       -- Calculate Coordinate Frame value for CameraStart to face CameraFocus.
+
+  local TweenSv = game:GetService("TweenService")                                    -- Calling the Tween Service
+  local TweenInf = TweenInfo.new(1,0)                                                -- Creating a new tween info of Time 1 second and EasingStyle Enum 0 (linear)
+  local newTween = TweenSv:Create(CurrentCam, TweenInf, {CFrame = CameraCFrame})      -- Creating the new tween
+	newTween:Play()                                                                    -- Play the new tween
+end
+
+game.ReplicatedStorage.TestRemoteEvent.OnClientEvent:Connect(function(Object1, Object2)  -- Bind the function to the original remote event
+  ChangeCamera(Object1, Object2)
+end)
+```
