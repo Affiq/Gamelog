@@ -24,3 +24,9 @@ Script (ServerSide)
 game.ReplicatedStorage.TestRemoteEvent:Fire("This is a test.")
 ```
 
+What should happen is that the message should be printed server side. It is important to note that Instances can also be passed as parameters - Parts, GameObjects, etc - and this can be useful for passing in instances that we may want to create a camera focus on. It is also important to note that functions cannot be passed through these events.
+
+<h2> Shifting Camera Focus </h2>
+
+The following example will detail how to create a camera that can shift focus on objects, while animating the camera to smoothly transition to the next camera position (think of the Gun Store in GTA V and how the camera focuses on different weapons you would like to observe). To obtain the clientside camera, one will simply need to call workspace.CurrentCamera. The camera comes with many different properties and methods that one can play around with, but we will be namely transitioning the Coordinate frame of the camera. The Coordinate frame not only determines the position of the camera, but also the orientation in which one should focus in. The constructor for the CFrame object also conveniently comes with a way to determine the CFrame required for Object 1 to face Object 2 (by calling CFrame.new(Object1.Position, Object2.Position) ).
+
