@@ -21,12 +21,59 @@ end)
 
 Script (ServerSide)
 ```
-game.ReplicatedStorage.TestRemoteEvent:Fire("This is a test.")
+game.ReplicatedStorage.TestRemoteEvent:FireAllClients("This is a test.")
 ```
 
 What should happen is that the message should be printed server side. It is important to note that Instances can also be passed as parameters - Parts, GameObjects, etc - and this can be useful for passing in instances that we may want to create a camera focus on. It is also important to note that functions cannot be passed through these events.
 
 <h2> Shifting Camera Focus </h2>
 
-The following example will detail how to create a camera that can shift focus on objects, while animating the camera to smoothly transition to the next camera position (think of the Gun Store in GTA V and how the camera focuses on different weapons you would like to observe). To obtain the clientside camera, one will simply need to call workspace.CurrentCamera. The camera comes with many different properties and methods that one can play around with, but we will be namely transitioning the Coordinate frame of the camera. The Coordinate frame not only determines the position of the camera, but also the orientation in which one should focus in. The constructor for the CFrame object also conveniently comes with a way to determine the CFrame required for Object 1 to face Object 2 (by calling CFrame.new(Object1.Position, Object2.Position) ).
+The following example will detail how to create a camera that can shift focus on objects, while animating the camera to smoothly transition to the next camera position (think of the a shop feature where the camera will pan to an object you would like to buy). To obtain the clientside camera, one will simply need to call workspace.CurrentCamera. The camera comes with many different properties and methods that one can play around with, but we will be namely transitioning the Coordinate frame of the camera. The Coordinate frame not only determines the position of the camera, but also the orientation in which one should focus in. The constructor for the CFrame object also conveniently comes with a way to determine the CFrame required for Object 1 to face Object 2 (by calling CFrame.new(Object1.Position, Object2.Position) see more <a href="https://create.roblox.com/docs/workspace/cframes"> here </a>). With this in mind, we would like to work with 2 objects in the workspace - the object to focus on and the camera starting position.
+
+LocalScript (ClientSide)
+```
+local CurrentCam = workspace.CurrentCamera        -- Get the clientside camera
+
+local CameraStart = Instance.new("Part")          -- Create a new part in workspace to function as camera position
+CameraStart.Parent = workspace
+CameraStart.Position = Vector3.new(0,5,10)
+
+local CameraFocus = Instance.new("Part")          -- Create a new part in workspace to function as camera focus
+CameraStart.Parent = workspace
+CameraStart.Position = Vector3.new(0,5,10)
+
+local CameraCFrame = CFrame.new(CameraStart.Position, CameraFocus.Position)        -- Calculate Coordinate Frame value for CameraStart to face CameraFocus.
+CurrentCam.CFrame = CameraCFrame                  -- Change the orientation of the camera object
+```
+
+The following is a very simple way to create a fixed camera angle, such as a CCTV. However, we can generalise the code by encapsulating it as a function, and passing the two instances as a parameter to enable modularity. We can also bind the function to the original remote so that the server is able to trigger the clients camera function via a Server Script.
+
+LocalScript (ClientSide)
+```
+function ChangeCamera(CameraStart, CameraFocus)
+  local CurrentCam = workspace.CurrentCamera                                        -- Get the clientside camera
+  local CameraCFrame = CFrame.new(CameraStart.Position, CameraFocus.Position)       -- Calculate Coordinate Frame value for CameraStart to face CameraFocus.
+  CurrentCam.CFrame = CameraCFrame                                                  -- Change the orientation of the camera object
+end
+
+game.ReplicatedStorage.TestRemoteEvent.OnClientEvent:Connect(function(Object1, Object2)  -- Bind the function to the original remote event
+  ChangeCamera(Object1, Object2)
+end)
+```
+
+Script (ServerSide)
+```
+-- We have 3 pairs of two parts in the workspace to function as three different camera scenes. I will avoid
+-- the instantiation process as it is a bit primitive, but we will assume these will be parts are named
+-- CS1, CS2, CS3 and CF1, CF2, CF3 to represent Camera Start and Camera Focus respectively.
+
+game.ReplicatedStorage.TestRemoteEvent:FireAllClients(CS1, CF1)
+wait(5)
+game.ReplicatedStorage.TestRemoteEvent:FireAllClients(CS2, CF2)
+wait(5)
+game.ReplicatedStorage.TestRemoteEvent:FireAllClients(CS2, CF2)
+wait(5)
+```
+
+By executing the server scripts, this will fire off the test remote event which in turn will trigger the clientside camera change and trigger 3 different 'cutscenes'. However, what one would notice is that this will cause an immediate 'switch' or 'snap' effect in the camera change, much like a person switching views in a CCTV. One would may opt for a smooth transition to a different view and hence some animation may be required which can be achieved by using the TweenService that the game provides.
 
