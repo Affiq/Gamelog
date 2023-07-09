@@ -54,7 +54,8 @@ CurrentCam.CFrame = CameraCFrame                  -- Change the orientation of t
 
 The following is a very simple way to create a fixed camera angle, such as a CCTV. However, we can generalise the code by encapsulating it as a function, and passing the two instances as a parameter to enable modularity. We can also bind the function to the original remote so that the server is able to trigger the clients camera function via a Server Script.
 
-LocalScript (ClientSide)
+<h3> LocalScript (ClientSide) </h3>
+
 ```
 function ChangeCamera(CameraStart, CameraFocus)
   local CurrentCam = workspace.CurrentCamera                                        -- Get the clientside camera
