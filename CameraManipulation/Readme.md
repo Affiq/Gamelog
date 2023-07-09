@@ -12,14 +12,16 @@ A remote event is an instance that can be created to enable communication betwee
 RemoteEvent must first be created in ReplicatedStorage named "TestRemoteEvent".
 </p>
 
-LocalScript (ClientSide)
+<h3> LocalScript (ClientSide) </h3>
+
 ```
 game.ReplicatedStorage.TestRemoteEvent.OnClientEvent:Connect(function(StringMessage)
-print(StringMessage)
+	print(StringMessage)
 end)
 ```
 
-Script (ServerSide)
+<h3> Script (ServerSide) </h3>
+
 ```
 game.ReplicatedStorage.TestRemoteEvent:FireAllClients("This is a test.")
 ```
@@ -30,7 +32,8 @@ What should happen is that the message should be printed server side. It is impo
 
 The following example will detail how to create a camera that can shift focus on objects, while animating the camera to smoothly transition to the next camera position (think of the a shop feature where the camera will pan to an object you would like to buy). To obtain the clientside camera, one will simply need to call workspace.CurrentCamera. The camera comes with many different properties and methods that one can play around with, but we will be namely transitioning the Coordinate frame of the camera. The Coordinate frame not only determines the position of the camera, but also the orientation in which one should focus in. The constructor for the CFrame object also conveniently comes with a way to determine the CFrame required for Object 1 to face Object 2 (by calling CFrame.new(Object1.Position, Object2.Position) see more <a href="https://create.roblox.com/docs/workspace/cframes"> here </a>). With this in mind, we would like to work with 2 objects in the workspace - the object to focus on and the camera starting position.
 
-LocalScript (ClientSide)
+<h3> LocalScript (ClientSide) </h3>
+
 ```
 local CurrentCam = workspace.CurrentCamera        -- Get the clientside camera
 CurrentCam.Type = "Scriptable"                    -- Change the camera to scriptable mode
@@ -63,7 +66,8 @@ game.ReplicatedStorage.TestRemoteEvent.OnClientEvent:Connect(function(Object1, O
 end)
 ```
 
-Script (ServerSide)
+<h3> Script (ServerSide) </h3>
+
 ```
 -- We have 3 pairs of two parts in the workspace to function as three different camera scenes. I will avoid
 -- the instantiation process as it is a bit primitive, but we will assume these will be parts are named
@@ -82,7 +86,8 @@ By executing the server scripts, this will fire off the test remote event which 
 <h2> Smooth Transitions </h2>
 To animate a camera this involves first defining a TweenInfo - which specifies the time of the animation and the easing style i.e. linear or a bounce transition - before calling the TweenService to create a new tween. This tween will need to be defined using what Instance is to be animated, the previous TweenInfo, and also the property change given as a string. The following is a small change in our ClientSide script to allow linear transitions.
 
-LocalScript (ClientSide)
+<h3> LocalScript (ClientSide) </h3>
+
 ```
 function ChangeCamera(CameraStart, CameraFocus)
   local CurrentCam = workspace.CurrentCamera                                        -- Get the clientside camera
