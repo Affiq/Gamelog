@@ -4,6 +4,14 @@ The following repository is to document the development of different components 
 
 The following documents will highlight game development in a Object-Oriented approach, with some focus on Event-Based approaches to designing a game. It is developed in Lua using the Roblox game engine via Studio.
 
+<h2> Game Development Tools </h2>
+<ul>
+  <li> <b> Game Engines: </b> Unity, Godot, Roblox, GameMaker </li>
+  <li> <b> Graphics: </b> GIMP, Paint.net, Aseprite (pixel graphics) </li>
+  <li> <b> Meshes/Animation: </b> Blender, Maya </li>
+  <li> <b> Audio: </b> Audacity, BFXR, SSFXR </li>
+  <li> <b> Music: </b> LMMS, Youtube Audio Library</li>
+</ul>
 
 <h2> Useful Resources </h2>
 <ul>
