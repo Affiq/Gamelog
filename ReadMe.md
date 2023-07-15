@@ -2,7 +2,7 @@
 
 The following repository is to document the development of different components for a game which may be applicable to other users, or general insight for people looking to develop a game. Each folder contains a readme that serves as an article or pointers on how to develop the specific component.
 
-The following documents will highlight game development in a Object-Oriented approach, with some focus on Event-Based approaches to designing a game. It is developed in Lua using the Roblox game engine via Studio.
+The following documents will highlight game development in a Object-Oriented approach, with some focus on Event-Based approaches to designing a game. It is developed in Lua using the Roblox game engine via Studio. You can see the current state of the game <a href="https://www.roblox.com/games/13939495820/Recipe-For-Disaster-Work-In-Progress"> here </a>
 
 <h2> Game Premise</h2>
 <p> The premise of the game revolves around four chefs working in different kitchens where levels are typically dynamic. Chefs can perform different tasks around the kitchen where in an ever-changing environment means they will need good communication, coordination and flexibility in order to serve orders on time and obtain as much tips as possible. </p>
