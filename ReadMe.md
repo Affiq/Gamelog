@@ -9,8 +9,6 @@ The following documents will highlight game development in a Object-Oriented app
 
 <p> So far, core gameplay mechanics have been implemented in the game which include dashing, picking up items, chopping ingredients, cooking and serving orders. The core gameplay UI has also been implemented consisting of a Score indicator (tips recieved from orders), a timer and an order queue which displays all orders that need to be completed in a certain amount of time. A level selection mechanic, level loading, and hosting mechanic (along with the relevant UI) has also been implemented. In regards to some services, a persistent save mechanic has also been implemented with the use of the DataStore Service.</p>
 
-<p> So far, </p>
-
 <h2> Game Development Tools </h2>
 <ul>
   <li> <b> Game Engines: </b> Unity, Godot, Roblox, GameMaker </li>
