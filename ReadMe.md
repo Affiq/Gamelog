@@ -9,7 +9,7 @@ The following documents will highlight game development in a Object-Oriented app
 <li><a href="CameraManipulation"> Camera Manipulation</a> </li>
 <li><a href="CollectionService"> Collection Service</a> </li>
 <li><a href="MainMenu"> Main Menus</a> </li>
-<li><a href=ScreenTransition""> Screen Transitions</a> </li>
+<li><a href="ScreenTransitions"> Screen Transitions</a> </li>
 <li><a href="ThrowingMechanics"> Throwing Mechanics</a> </li>
 </ul>
 
